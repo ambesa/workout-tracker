@@ -1,0 +1,55 @@
+<!-- exercise.html -->
+<ol class="breadcrumb">
+  <li><a href="#workouts">Workout Log</a></li>
+  <li><a href="#workout/{{ WorkoutID }}">Workout Info</a></li>
+  <li class="active">Exercise Info</li>
+</ol>
+<h1>{{ exercise_name }}</h1>
+<div id="exercise_summary">
+
+
+</div>
+<div id="sets-quickadd">
+	<form class="form-inline" ng-submit="submit()">
+		<div class="form-group well">
+			<label class="sr-only">Quantity</label>
+			<input type="text" name="sets-quantity" class="form-control" placeholder="Quantity" ng-model="FormData.Quantity"  />
+			<label class="sr-only">Repetitions</label>
+			<input type="text" name="sets-repetitions" class="form-control" placeholder="Repetitions" ng-model="FormData.Repetition" />
+			<button type="submit" class="btn btn-primary" name="addExerciseInfo" id="addExerciseInfo">Add</button>
+		</div>			
+	</form>
+</div>
+<hr>
+<div id="data-container">
+	<button ng-click="view='list'" class="btn btn-default">List</button>
+	<button ng-click="view='table'" class="btn btn-default">Table</button>
+	<p ng-show="sets.length <= 0" class="no-data-table text-center">Nothing here. Add an exercise!</p>
+	<div class="list-group" ng-show="sets.length > 0 && view == 'list'">
+		<span class="list-group-item" ng-repeat="set in sets">
+			<h4 class="list-group-item-heading">{{ set.Quantity }} x {{ set.Repetitions }}</h4>
+			<p class="list-group-item-text"></p>
+		</span>
+	</div>
+	<table ng-show="sets.length > 0 && view == 'table'" class="table sets-data-table">
+		<thead>
+			<th>SetID</th>
+			<th>ExerciseID</th>
+			<th>SetOrder</th>
+			<th>Quantity</th>
+			<th>Repetitions</th>
+			<th>Action</th>
+		</thead>
+		<tr ng-repeat="set in sets">
+			<td>{{ set.SetID }} </td>
+			<td>{{ set.ExerciseID }} </td>
+			<td>{{ set.SetOrder }} </td>
+			<td>{{ set.Quantity }} </td>
+			<td>{{ set.Repetitions }} </td>
+			<td>
+				<button type="button" class="set-edit btn btn-default"> Edit</button>
+				<button type="button" class="set-remove btn btn-default" ng-click="delete(set.SetID)"> Remove</button>
+			</td>
+		</tr>
+	</table>
+</div>

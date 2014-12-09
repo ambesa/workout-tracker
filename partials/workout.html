@@ -1,0 +1,51 @@
+<!-- workout.html -->
+<ol class="breadcrumb">
+  <li><a href="#workouts">Workout Log</a></li>
+  <li class="active">Workout Info</li>
+</ol>
+<h1>Workout Info
+<small></small></h1>
+<div id="workout_summary">
+
+
+</div>
+<div id="exercises-quickadd">
+	<form class="form-inline" ng-submit="submit()">
+		<div class="form-group well">
+			<label class="sr-only">Exercise Name</label>
+			<input type="text" name="exercises-exercise-name" class="form-control" placeholder="Exercise Name" ng-model="FormData.ExerciseName" />
+			<button type="submit" class="btn btn-primary" name="addWorkoutInfo">Add</button>
+		</div>			
+	</form>
+</div>
+<hr>
+<div id="data-container">
+	<button ng-click="view ='list'" class="btn btn-default">List</button>
+	<button ng-click="view='table'" class="btn btn-default">Table</button>
+	<p ng-show="exercises.length <= 0" class="no-data-table text-center">Nothing here. Add an exercise!</p>
+	<div class="list-group" ng-show="exercises.length > 0 && view == 'list'">
+		<a href="#/workout/{{ exercise.WorkoutID }}/exercise/{{ exercise.ExerciseID }}" class="list-group-item" ng-repeat="exercise in exercises">
+			<h4 class="list-group-item-heading">{{ exercise.ExerciseName }}</h4>
+			<p class="list-group-item-text"></p>
+		</a>
+	</div>
+	<table ng-show="exercises.length > 0 && view == 'table'" class="table table-hover exercises-data-table">
+	<thead>
+		<th>ExerciseID</th>
+		<th>WorkoutID</th>
+		<th>ExerciseOrder</th>
+		<th>ExerciseName</th>
+		<th>Action</th>
+	</thead>
+	<tr class="clickable-row" ng-repeat="exercise in exercises">
+		<td>{{ exercise.ExerciseID }}</td>
+		<td>{{ exercise.WorkoutID }}</td>
+		<td>{{ exercise.ExerciseOrder }}</td>
+		<td><a href="#/workout/{{ exercise.WorkoutID }}/exercise/{{ exercise.ExerciseID }}">{{ exercise.ExerciseName }}</td>
+		<td>
+			<button type="button" class="exercise-edit btn btn-default">Edit</button>
+  			<button type="button" class="exercise-remove btn btn-default" ng-click="delete(exercise.ExerciseID)">Remove</button>
+  		</td>
+  	</tr>
+	</table>
+</div>

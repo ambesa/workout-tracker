@@ -1,0 +1,66 @@
+<!-- workout-log.html -->
+
+<h1>Workout Log</h1>
+<div id="workoutlog-summary">
+	
+</div>
+<div id="workoutlog-quickadd">
+	<form class="form-inline" ng-submit="submit()">
+		<div class="form-group well">
+			<label class="sr-only">Start Date & Time</label>
+				<span class="dropdown">
+				    <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+				        <div class="input-group">
+				        	<input type="text" class="form-control" data-ng-model="FormData.Date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				        </div>
+				    </a>
+				    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				        <datetimepicker data-ng-model="FormData.Date"
+				                        data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
+				    </ul>
+				</span>
+			<label class="sr-only">Location</label>
+				<input type="text" name="workoutlog-location" class="form-control" placeholder="Location" ng-model="FormData.Location" />
+			<label class="sr-only">Notes</label>
+				<input type="text" name="workoutlog-notes" class="form-control" placeholder="Notes"  ng-model="FormData.Notes"/>
+			<button type="submit" class="btn btn-primary" name="addWorkoutLog">Add</button>
+		</div>			
+	</form>
+</div>
+<hr>
+<div id="data-container">
+	<button ng-click="view ='list'" class="btn btn-default">List</button>
+	<button ng-click="view='table'" class="btn btn-default">Table</button>
+	<p ng-show="workouts.length <= 0" class="no-data-table text-center">Nothing here. Add an exercise!</p>
+	<div class="list-group" ng-show="workouts.length > 0 && view == 'list'">
+		<a href="#/workout/{{workout.WorkoutID}}" class="list-group-item" ng-repeat="workout in workouts" ng-mouseenter="workoutHover = true" ng-mouseleave="workoutHover = false">
+			<h4 class="list-group-item-heading">{{ workout.StartDate| asDate | date:'EEEE MMM d' }} 
+				<small class="pull-right" ng-show="workoutHover">{{ workout.StartDate| asDate | date:'h:mm a' }} <span ng-show="!workout.Location && workoutHover">| {{ workout.Location }} </span></small>
+			</h4>
+			<div class="list-group-item-text" ng-show="workoutHover">
+				
+			</div>
+		</a>
+	</div>
+	<table ng-show="workouts.length > 0 && view == 'table'" class="table table-hover workoutlog-data-table">
+		<thead>
+			<th>WorkoutID</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>Notes</th>
+			<th>Action</th>
+		</thead>
+		<tr class="clickable-row" ng-repeat="workout in workouts">
+			<td>{{workout.WorkoutID}}</td>
+			<td><a href="#/workout/{{workout.WorkoutID}}">{{ workout.StartDate| asDate | date:'medium' }}</a></td>
+			<td>{{workout.Location}}</td>
+			<td>{{workout.Notes}}</td>
+			<td>
+				<button type="button" class="workout-edit btn btn-default">Edit
+				</button>
+				<button type="button" class="workout-remove btn btn-default" ng-click="delete(workout.WorkoutID)">Remove
+				</button>
+			</td>
+		</tr>
+	</table>
+</div>
