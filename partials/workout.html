@@ -1,22 +1,29 @@
 <!-- workout.html -->
-<ol class="breadcrumb">
-  <li><a href="#workouts">Workout Log</a></li>
-  <li class="active">Workout Info</li>
-</ol>
-<h1>Workout Info
-<small></small></h1>
-<div id="workout_summary">
-
-
+<div class="row">
+	<div class="col-xs-12">
+		<ol class="breadcrumb">
+		  <li><a href="#workouts">Workout Log</a></li>
+		  <li class="active">Workout Info</li>
+		</ol>
+	</div>
 </div>
-<div id="exercises-quickadd">
-	<form class="form-inline" ng-submit="submit()">
-		<div class="form-group well">
-			<label class="sr-only">Exercise Name</label>
-			<input type="text" name="exercises-exercise-name" class="form-control" placeholder="Exercise Name" ng-model="FormData.ExerciseName" />
-			<button type="submit" class="btn btn-primary" name="addWorkoutInfo">Add</button>
-		</div>			
-	</form>
+<div class="row">
+	<div class="col-xs-auto">
+		<span class="h2">Workout Info</span>
+	</div>
+	<div class="col-xs-auto-right">
+		<div id="exercises-quickadd">
+			<form class="form-inline" ng-submit="submit()">
+				<div class="form-group well">
+					<label class="sr-only">Exercise Name</label>
+					<input type="text" name="exercises-exercise-name" class="form-control" placeholder="Exercise Name" ng-model="FormData.ExerciseName" />
+					<button type="submit" class="btn btn-primary" name="addWorkoutInfo">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+					</button>
+				</div>			
+			</form>
+		</div>
+	</div>
 </div>
 <div class="btn-group pull-right" role="group" aria-label="...">
 	<button ng-click="view ='list'" class="btn btn-default">List</button>
@@ -69,4 +76,9 @@
   		</td>
   	</tr>
 	</table>
+</div>
+
+<div id="footer" class="text-center">
+	<hr />
+	<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 </div>

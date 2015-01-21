@@ -10,16 +10,12 @@ function getExercises($wid) {
         $stmt->bindParam("wid", $wid);
         $stmt->execute();
         $exercises = $stmt->fetchAll(PDO::FETCH_OBJ);
-        //$exercises = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         // Add Sets to Exercises
         foreach($exercises as $exercise){
             $exercise_id = $exercise->ExerciseID;
             $set_list = getSets($exercise_id);
             $exercise->Sets = $set_list['sets'];
-
-            // Add Set Min to Exercises
-            //$exercise_min = getExerciseMin($exercise_id);
             $exercise->ExerciseStats = getExerciseStats($exercise_id)[0];//$exercise_min['exercise_min'];
         }
 

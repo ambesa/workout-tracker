@@ -1,0 +1,43 @@
+<!-- new-workout.html -->
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-3">
+		<h1>Add New Workout</h1>
+		<div id="workoutlog-quickadd">
+			<form ng-submit="submit()">
+				<div class="form-group">
+					<label>Start Date & Time</label>
+					<span class="dropdown">
+					    <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+					        <div class="input-group">
+					        	<input type="text" class="form-control" data-ng-model="FormData.Date" />
+					        		<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+					        </div>
+					    </a>
+					    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					        <datetimepicker data-ng-model="FormData.Date"
+					                        data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
+					    </ul>
+					</span>
+				</div>
+				<div class="form-group">
+					<label>Location (Optional)</label>
+					<input type="text" name="workoutlog-location" class="form-control" ng-model="FormData.Location" />
+				</div>
+				<div class="form-group">
+					<label>Notes (Optional)</label>
+					<input type="text" name="workoutlog-notes" class="form-control" ng-model="FormData.Notes"/>
+				</div>
+				<button type="submit" class="btn btn-primary" name="addWorkoutLog">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+				</button>		
+			</form>
+			{{ response.id }}
+		</div>
+	</div>
+</div>
+<div id="footer" class="row">
+	<div class="col-lg-6 col-lg-offset-3 text-center">
+		<hr>
+		<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+	</div>
+</div>

@@ -21,6 +21,9 @@ $app->get('/all', function() {
 $app->get('/workouts', function() {
     echoJSON(getWorkouts());
 });
+$app->get('/workouts/:wid', function($wid) {
+    echoJSON(getWorkout($wid));
+});
 $app->post('/workouts', 'addWorkout');
 $app->delete('/workouts/:wid/', 'deleteWorkout');
 //$app->get('/workouts/:id',  'getWorkout');

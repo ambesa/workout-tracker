@@ -1,7 +1,5 @@
 <?php
 
-
-
 function getSets($eid) {
     $sql = "SELECT SetID, SetOrder, Repetitions, Quantity 
             FROM Sets

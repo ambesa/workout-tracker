@@ -14,6 +14,10 @@ workoutApp.config(['$routeProvider',
 	      templateUrl: 'partials/exercise.html',
 	      controller: 'ExerciseCtrl'
 	    }).
+	    when('/new/workout', {
+	      templateUrl: 'partials/new-workout.html',
+	      controller: 'NewWorkoutCtrl'
+	    }).
 	    otherwise({
 	      redirectTo: '/workouts'
 	    });

@@ -4,9 +4,6 @@ angular.module('workoutControllers', [])
 	$scope.view = 'list';
 
 	$scope.loadWorkouts = function() {
-		/*Workouts.get(function(data) {
-			$scope.workouts = data.workouts;
-		});*/
 		All.get(function(data) {
 			$scope.workouts = data.workouts;
 		})
@@ -75,6 +72,7 @@ angular.module('workoutControllers', [])
 
 .controller('ExerciseCtrl', ['$scope', 'Sets', '$routeParams', function($scope, Sets, $routeParams) {
 	$scope.WorkoutID = $routeParams.wid;
+	$scope.ExerciseID = $routeParams.eid;
 	$scope.FormData = {};
 	$scope.view = 'list';
 
@@ -105,4 +103,36 @@ angular.module('workoutControllers', [])
 	};
 
 	$scope.loadSets();
+} ])
+
+.controller('NewWorkoutCtrl', ['$scope', '$location', 'Workouts', 'All', function($scope, $location, Workouts, All) {
+	$scope.FormData = {};
+	$scope.view = 'list';
+
+	$scope.loadWorkouts = function() {
+		All.get(function(data) {
+			$scope.workouts = data.workouts;
+		})
+	};
+
+	$scope.submit = function() {
+		if ($scope.FormData.Date) {
+			var $param = {
+				"StartDate": $scope.FormData.Date,
+				"EndDate": $scope.FormData.Date,
+				"Location": $scope.FormData.Location,
+				"Notes": $scope.FormData.Notes,
+			};
+			$scope.workouts.push($param);
+			Workouts.save({}, $param, function(data) {
+				$scope.response = data;
+				$location.path('/workout/' + $scope.response.id);
+			});
+			$scope.FormData.Date = '';
+			$scope.FormData.Time = '';
+			$scope.FormData.Location = '';
+			$scope.FormData.Notes = '';
+		}
+	};
+	$scope.loadWorkouts();
 } ]);

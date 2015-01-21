@@ -1,11 +1,19 @@
 angular.module('workoutControllers')
-.controller('ExerciseCtrl', ['$scope', 'Sets', '$routeParams', function($scope, Sets, $routeParams) {
+.controller('ExerciseCtrl', ['$scope', 'Workouts', 'Sets', '$routeParams', function($scope, Workouts, Sets, $routeParams) {
 	$scope.WorkoutID = $routeParams.wid;
 	$scope.FormData = {};
+
+	$scope.loadWorkoutInfo = function() {
+	};
 
 	$scope.loadSets = function() {
 		Sets.get( { wid: $routeParams.wid, eid: $routeParams.eid }, function(data) {
     		$scope.sets = data.sets;
+    		console.log(sets);
+		});
+		Workouts.get( { wid: $routeParams.wid }, function(data) {
+    		$scope.workout = data.workout;
+    		console.log(data);
 		});
 	};
 
@@ -29,5 +37,6 @@ angular.module('workoutControllers')
 	};
 
 	$scope.loadSets();
+	$scope.loadWorkoutInfo();
   
 } ]);

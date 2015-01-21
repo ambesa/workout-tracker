@@ -37,16 +37,32 @@ function getWorkouts() {
     }
 }
  
-function getWorkout($id) {
-    $sql = "SELECT * FROM wine WHERE id=:id";
+function getWorkout($wid) {
+    $sql = "SELECT WorkoutID, PersonID, StartDate, EndDate, Location, Notes 
+            FROM Workouts
+            WHERE WorkoutID = :wid";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("id", $id);
+        $stmt->bindParam("wid", $wid);
         $stmt->execute();
-        $wine = $stmt->fetchObject();
+        $workout = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $workout = $workout[0];
         $db = null;
-        echo json_encode($wine);
+
+        $date = substr($workout->StartDate, 0, 10);
+        $time = substr($workout->StartDate, 11, 8);
+        $workout->StartDate = $date . 'T' . $time;
+            
+        $exercise_list = getExercises($wid);
+        $workout->Exercises = $exercise_list['exercises'];
+        foreach($workout->Exercises as $exercise){
+            $exercise_id = $exercise->ExerciseID;
+            $set_list = getSets($exercise_id);
+            $exercise->Sets = $set_list['sets'];
+        }
+        $workout_obj['workout'] = $workout;
+        return $workout_obj;
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
