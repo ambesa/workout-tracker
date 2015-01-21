@@ -27,18 +27,22 @@
 		</div>			
 	</form>
 </div>
+	<div class="btn-group pull-right" role="group" aria-label="...">
+		<button ng-click="view ='list'" class="btn btn-default">List</button>
+		<button ng-click="view='table'" class="btn btn-default">Table</button>
+	</div>
 <hr>
 <div id="data-container">
-	<button ng-click="view ='list'" class="btn btn-default">List</button>
-	<button ng-click="view='table'" class="btn btn-default">Table</button>
 	<p ng-show="workouts.length <= 0" class="no-data-table text-center">Nothing here. Add an exercise!</p>
 	<div class="list-group" ng-show="workouts.length > 0 && view == 'list'">
 		<a href="#/workout/{{workout.WorkoutID}}" class="list-group-item" ng-repeat="workout in workouts" ng-mouseenter="workoutHover = true" ng-mouseleave="workoutHover = false">
-			<h4 class="list-group-item-heading">{{ workout.StartDate| asDate | date:'EEEE MMM d' }} 
-				<small class="pull-right" ng-show="workoutHover">{{ workout.StartDate| asDate | date:'h:mm a' }} <span ng-show="!workout.Location && workoutHover">| {{ workout.Location }} </span></small>
-			</h4>
-			<div class="list-group-item-text" ng-show="workoutHover">
-				
+			<h3 class="list-group-item-heading">{{ workout.StartDate | asDate | date: 'EEE MMM d' }} 
+				<small class="pull-right" ng-show="workoutHover">{{ workout.StartDate |  asDate | date:'h:mm a' }} <span ng-show="!workout.Location && workoutHover">| {{ workout.Location }} </span></small>
+			</h3>
+			<div class="list-group-item-text">
+				<div ng-repeat="exercise in workout.Exercises">{{exercise.ExerciseName}}
+					<span ng-repeat="sets in exercise.Sets">{{sets.Quantity}}x{{sets.Repetitions}}&nbsp;</span>
+				</div>
 			</div>
 		</a>
 	</div>
@@ -52,7 +56,7 @@
 		</thead>
 		<tr class="clickable-row" ng-repeat="workout in workouts">
 			<td>{{workout.WorkoutID}}</td>
-			<td><a href="#/workout/{{workout.WorkoutID}}">{{ workout.StartDate| asDate | date:'medium' }}</a></td>
+			<td><a href="#/workout/{{workout.WorkoutID}}">{{ workout.StartDate | asDate | date: 'fullDate'}}</a></td>
 			<td>{{workout.Location}}</td>
 			<td>{{workout.Notes}}</td>
 			<td>

@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Database: `workout`
 --
 
+CREATE DATABASE IF NOT EXISTS workout;
+USE workout;
+
 -- --------------------------------------------------------
 
 --

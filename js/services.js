@@ -1,3 +1,7 @@
+workoutApp.factory('All', ['$resource', function($resource) {
+  return $resource('services/all');
+}]);
+
 workoutApp.factory('Workouts', ['$resource', function($resource) {
   return $resource('services/workouts/:wid');
 }]);

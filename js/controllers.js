@@ -1,13 +1,15 @@
 angular.module('workoutControllers', [])
-
-.controller('WorkoutLogCtrl', ['$scope', 'Workouts', function($scope, Workouts) {
+.controller('WorkoutLogCtrl', ['$scope', 'Workouts', 'All', function($scope, Workouts, All) {
 	$scope.FormData = {};
 	$scope.view = 'list';
 
 	$scope.loadWorkouts = function() {
-		Workouts.get(function(data) {
+		/*Workouts.get(function(data) {
 			$scope.workouts = data.workouts;
-		});
+		});*/
+		All.get(function(data) {
+			$scope.workouts = data.workouts;
+		})
 	};
 
 	$scope.submit = function() {
