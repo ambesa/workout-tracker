@@ -16,7 +16,8 @@ function getExercises($wid) {
             $exercise_id = $exercise->ExerciseID;
             $set_list = getSets($exercise_id);
             $exercise->Sets = $set_list['sets'];
-            $exercise->ExerciseStats = getExerciseStats($exercise_id)[0];//$exercise_min['exercise_min'];
+            $stats = getExerciseStats($exercise_id);
+            $exercise->ExerciseStats = $stats[0];//$exercise_min['exercise_min'];
         }
 
         // Create Exercises Object
@@ -37,9 +38,8 @@ function getExerciseStats($eid) {
         $stmt->bindParam("eid", $eid);
         $stmt->execute();
         $stats = $stmt->fetchAll(PDO::FETCH_OBJ);
-        //$exercises = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        //$exercise_min['exercise_min'] = $min;
+        //$e_stats['exercise_stats'] = $stats;
         return $stats;
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';

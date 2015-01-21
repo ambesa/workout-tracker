@@ -14,16 +14,10 @@ include 'functions/DatabaseConnection.php';
 
 // Workouts
 
-$app->get('/all', function() {
-    echoJSON(getAll());
-});
+$app->get('/all', function() { echoJSON(getAll()); });
 
-$app->get('/workouts', function() {
-    echoJSON(getWorkouts());
-});
-$app->get('/workouts/:wid', function($wid) {
-    echoJSON(getWorkout($wid));
-});
+$app->get('/workouts', function() { echoJSON(getWorkouts()); });
+$app->get('/workouts/:wid', function($wid) { echoJSON(getWorkout($wid)); });
 $app->post('/workouts', 'addWorkout');
 $app->delete('/workouts/:wid/', 'deleteWorkout');
 //$app->get('/workouts/:id',  'getWorkout');
@@ -33,9 +27,7 @@ $app->delete('/workouts/:wid/', 'deleteWorkout');
 //$app->delete('/workouts/:id',   'deleteWorkout');
 
 // Exercises
-$app->get('/workouts/:wid/exercises', function($wid) {
-    echoJSON(getExercises($wid));
-});
+$app->get('/workouts/:wid/exercises', function($wid) { echoJSON(getExercises($wid)); });
 $app->post('/workouts/:wid/exercises', 'addExercise');
 $app->delete('/workouts/:wid/exercises/:eid', 'deleteExercise');
 
