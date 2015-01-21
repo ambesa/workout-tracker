@@ -11,6 +11,8 @@ This web app allows you to enter in and save your workouts. It will present grap
 >### Exercise Info View
 >When you click on a specific exercise on the workout info page, you're taken to the exercise info page. On this page, you can enter in the sets and repetitions you performed for that particular exercise.
 
+## [Demo](http://mattagra.com/workout-tracker/#/workouts)
+
 ## Setting Up
 * In 'services/index.php', look at the getConnection() function at the end of the file and modify the values for *$dbhost*, *$dbuser*, *$dbpass*, and *$dbname*.
 * Run the SQL query in the 'sql' folder to set up the necessary tables in your database. 
