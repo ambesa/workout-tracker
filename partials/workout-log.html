@@ -36,8 +36,17 @@
 	<p ng-show="workouts.length <= 0" class="no-data-table text-center">Nothing here. Add an exercise!</p>
 	<div class="list-group" ng-show="workouts.length > 0 && view == 'list'">
 		<a href="#/workout/{{workout.WorkoutID}}" class="list-group-item" ng-repeat="workout in workouts" ng-mouseenter="workoutHover = true" ng-mouseleave="workoutHover = false">
-			<h3 class="list-group-item-heading">{{ workout.StartDate | asDate | date: 'EEE MMM d' }} 
-				<small class="pull-right" ng-show="workoutHover">{{ workout.StartDate |  asDate | date:'h:mm a' }} <span ng-show="!workout.Location && workoutHover">| {{ workout.Location }} </span></small>
+			<h3 class="list-group-item-heading">{{ workout.StartDate | asDate | date: 'EEE MMM d' }}
+				<div class="pull-right">
+					<div class="btn-group" ng-show="workout.Location">
+						<button type="button" class="btn btn-sm btn-default" disabled="disabled">Location</button>
+						<button type="button" class="btn btn-sm btn-default" disabled="disabled">{{workout.Location}}</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-default" disabled="disabled">Time</button>
+						<button type="button" class="btn btn-sm btn-default" disabled="disabled">{{ workout.StartDate |  asDate | date:'h:mm a' }}</button>
+					</div>
+				</div>	
 			</h3>
 			<div class="list-group-item-text">
 				<div ng-repeat="exercise in workout.Exercises">{{exercise.ExerciseName}}

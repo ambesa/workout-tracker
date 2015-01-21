@@ -20,7 +20,6 @@ angular.module('workoutControllers')
 			});
 			$scope.FormData.Quantity = '';
 			$scope.FormData.Repetition = '';
-		}
 	};
 
 	$scope.delete = function($sid) {
